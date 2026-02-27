@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <title>Historico</title>
+</head>
+<body>
+    <header>
+        <h1>Histórico de Compras</h1>
+        <div>
+            <a href="index.html">Início</a>
+            <button id="btnTema" onclick="alternarTema()">🌙</button>
+        </div>
+    </header>
+
+    <main>
+        <div class="card" id="historico"></div>
+
+        <div id="modal" style="display:none" class="modal-overlay">
+            <div class="modal-box">
+                <div id="modalConteudo"></div>
+                <button onclick="fecharModal()">Fechar</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        
+    </footer>
+
+    <script src="historico.js"></script>
+</body>
+</html>
