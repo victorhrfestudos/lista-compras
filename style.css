@@ -24,6 +24,7 @@ body.dark {
 
 main {
     padding: 16px;
+    padding-bottom: 120px;
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -96,7 +97,7 @@ footer {
 footer .linha {
     max-width: 600px;
     margin: 0 auto;
-    align-items: center;
+    width: 100%;
 }
 
 footer button {
@@ -199,6 +200,9 @@ header a:hover {
     font-size: 1.2rem;
     font-weight: bold;
     text-align: right;
+    color: var(--cor-texto);
+    padding: 0 0 8px 0;
+    display: block;
 }
 
 #btnTema {
@@ -294,13 +298,4 @@ header a:hover {
         font-size: 1.5rem;
     }
     
-}
-
-#total {
-    color: var(--cor-texto);
-    font-weight: bold;
-    font-size: 1rem;
-    white-space: nowrap;
-    flex: 1;
-    padding: 12px;
 }
