@@ -36,7 +36,7 @@ window.onload = function() {
     }
 
     renderizarLista()
-    document.getElementById('total').innerHTML = `Total: R$ ${calcularTotal()}`
+    document.getElementById('total').textContent = `Total: R$ ${calcularTotal()}`
 }
 
 function calcularTotal() {
@@ -86,7 +86,7 @@ function adicionarItem() {
     proximoId++
 
     renderizarLista()
-    document.getElementById('total').innerHTML = `Total: R$ ${calcularTotal()}`
+    document.getElementById('total').textContent = `Total: R$ ${calcularTotal()}`
     document.getElementById('nome').value = ""
     document.getElementById('preco').value = ""
     document.getElementById('quantidade').value = ""
@@ -105,14 +105,14 @@ function editarItem(id) {
     item.quantidade = parseInt(novaQtd)
 
     renderizarLista()
-    document.getElementById('total').innerHTML = `Total: R$ ${calcularTotal()}`
+    document.getElementById('total').textContent = `Total: R$ ${calcularTotal()}`
     salvarDados()
 }
 
 function excluirItem(id) {
     listadeCompras = listadeCompras.filter(item => item.id !== id)
     renderizarLista()
-    document.getElementById('total').innerHTML = `Total: R$ ${calcularTotal()}`
+    document.getElementById('total').textContent = `Total: R$ ${calcularTotal()}`
     salvarDados()
 }
 
@@ -130,7 +130,7 @@ function limparLista(){
     proximoId = 1
 
     renderizarLista()
-    document.getElementById('total').innerHTML = `Total: R$ ${calcularTotal()}`
+    document.getElementById('total').textContent = `Total: R$ ${calcularTotal()}`
     salvarDados()
 }
 
