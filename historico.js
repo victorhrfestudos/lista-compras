@@ -37,6 +37,7 @@ function renderizarHistorico() {
                 <span class="compra-data">📅 ${compra.data}</span>
                 <span class="compra-total">R$ ${compra.total}</span>
                 <button onclick="verDetalhes(${compra.id})">Ver Detalhes</button>
+                <button onclick="excluirCompra(${compra.id})">Excluir</button>
             </div>
         `
     }
@@ -61,6 +62,12 @@ function verDetalhes(id) {
     
     document.getElementById('modalConteudo').innerHTML = conteudo
     document.getElementById('modal').style.display = "block"
+}
+
+function excluirCompra(id) {
+    historico = historico.filter(item => item.id !== id)
+    renderizarHistorico()
+    localStorage.setItem('historico', JSON.stringify(historico))
 }
 
 function fecharModal(){
