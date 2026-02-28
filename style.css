@@ -1,44 +1,306 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="style.css">
-        <link rel="manifest" href="manifest.json">
-        <title>Lista de Compras</title>
-    </head>
-    <body>
-        <header>
-            <h1> Lista de Compras</h1>
-            <div>
-                <a href="historico.html">Histórico</a>
-                <button id="btnTema" onclick="alternarTema()">🌙</button>
-            </div>
-            
-        </header>
-        <main>
-            <div class="card">
-                <input type="text" id="nome" placeholder="Produto">
-                <div class="linha">
-                    <input type="number" id="preco" step="0.01" placeholder="Preço">                
-                    <input type="number" id="quantidade" placeholder="Quantidade">
-                </div>
-            </div>
-            <div class="linha">
-                <button id="btnAdicionar" class="icon-button" title="Adicionar Item">Adicionar Item</button>
-                <button id="btnLimpar" class="icon-button" title="Limpar Tudo">Limpar Tudo</button>
-            </div>
-            <div id="lista" class="card">
-                <!-- lista -->
-            </div>
-        </main>
-        <footer>
-            <div class="linha">
-                <span id="total">Total: R$ 0</span>
-                <button id="btnFinalizar" class="icon-button" title="Finalizar Compra">Finalizar Compra</button>
-            </div>
-        </footer>
+:root {
+    --cor-fundo: #f0f2f5;
+    --cor-card: #ffffff;
+    --cor-texto: #333333;
+    --cor-texto-secundario: #666666;
+    --cor-primaria: #5c6bc0;
+    --cor-botao-texto: #ffffff;
+    --cor-input: #f5f5f5;
+    --cor-borda: #e0e0e0;
+    --cor-perigo: #e53935;
+}
 
-        <script src="script.js"></script>    
-    </body>
-</html>
+body.dark {
+    --cor-fundo: #1a1a2e;
+    --cor-card: #2a2a3e;
+    --cor-texto: #ffffff;
+    --cor-texto-secundario: #aaaacc;
+    --cor-primaria: #5c6bc0;
+    --cor-botao-texto: #ffffff;
+    --cor-input: #2d2d44;
+    --cor-borda: #3d3d5c;
+    --cor-perigo: #e53935;
+}
+
+main {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.card {
+    background-color: var(--cor-card);
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 8px;
+    border: 1px solid var(--cor-borda);
+    border-radius: 8px;
+    background-color: var(--cor-input);
+    color: var(--cor-texto);
+    font-size: 1rem;
+    outline: none;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--cor-primaria);
+    color: var(--cor-botao-texto);
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+#btnLimpar {
+    background-color: var(--cor-perigo);
+}
+
+.linha {
+    display: flex;
+    gap: 8px;
+}
+
+.linha input {
+    flex: 1;
+}
+
+.linha button {
+    flex: 1;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 12px 16px;
+    background-color: var(--cor-card);
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
+}
+
+footer .linha {
+    max-width: 600px;
+    margin: 0 auto;
+    align-items: center;
+}
+
+footer button {
+    flex: 1;
+    margin-top: 0;
+}
+
+footer a {
+    flex: 1;
+    padding: 12px;
+    text-align: center;
+    background-color: var(--cor-card);
+    border: 2px solid var(--cor-primaria);
+    border-radius: 8px;
+    color: var(--cor-primaria);
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+    font-family: 'Segoe UI', sans-serif;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+header {
+    background-color: var(--cor-primaria);
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    color: white;
+    font-size: 1.2rem;
+    padding: 0px 30px;
+}
+
+header a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 8px 12px;
+    border: 1px solid rgba(255,255,255,0.5);
+    border-radius: 8px;
+}
+
+header a:hover {
+    background-color: rgba(255,255,255,0.1);
+}
+
+.item-lista {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--cor-borda);
+}
+
+.item-lista:last-child {
+    border-bottom: none;
+}
+
+.item-nome {
+    font-weight: bold;
+    flex: 1;
+}
+
+.item-info {
+    color: var(--cor-texto-secundario);
+    font-size: 0.9rem;
+    padding: 0px 12px;
+}
+
+.item-acoes {
+    display: flex;
+    gap: 8px;
+}
+
+.item-acoes button {
+    width: auto;
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    margin-top: 0;
+}
+
+.btn-excluir {
+    background-color: var(--cor-perigo) !important;
+}
+
+#total {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: right;
+}
+
+#btnTema {
+    width: auto;
+    padding: 8px 12px;
+    margin-top: 0;
+    background-color: transparent;
+    font-size: 1.2rem;
+    border: none;
+}
+
+.compra-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--cor-borda);
+}
+
+.compra-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--cor-borda);
+    gap: 12px;
+    flex-wrap: nowrap;
+}
+
+.compra-data {
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.compra-total {
+    color: var(--cor-primaria);
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-box {
+    margin: auto;
+    background-color: var(--cor-card);
+    border-radius: 12px;
+    padding: 24px;
+    width: 90%;
+    max-width: 500px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.modal-titulo {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 16px;
+}
+
+.compra-item {
+    flex-wrap: wrap;
+}
+
+.compra-item button {
+    width: auto;
+    padding: 6px 12px;
+    margin-top: 0;
+    font-size: 0.85rem;
+}
+
+@media (min-width: 768px) {
+    main {
+        max-width: 900px;
+        padding: 32px;
+    }
+
+    header {
+        padding: 20px 32px;
+    }
+
+    header h1 {
+        font-size: 1.5rem;
+    }
+    
+}
+
+#total {
+    color: var(--cor-texto);
+    font-weight: bold;
+    font-size: 1rem;
+    white-space: nowrap;
+    flex: 1;
+    padding: 12px;
+}
